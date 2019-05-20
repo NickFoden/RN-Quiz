@@ -3,8 +3,6 @@ import { View, SafeAreaView, StyleSheet, StatusBar, Text } from "react-native";
 import { Button, ButtonContainer } from "../components/Button";
 import { Alert } from "../components/Alert";
 
-import TEMP_QUESTIONS from "../data/computers";
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#36b1f0",
@@ -31,7 +29,7 @@ class Quiz extends React.Component {
     answered: false,
     answeredCorrect: false,
     correctCount: 0,
-    totalCount: TEMP_QUESTIONS.length
+    totalCount: this.props.navigation.getParam("questions", []).length
   };
 
   answer = correct =>
@@ -67,9 +65,15 @@ class Quiz extends React.Component {
     });
   };
   render() {
-    const question = TEMP_QUESTIONS[this.state.activeQuestionIndex];
+    const questions = this.props.navigation.getParam("questions", []);
+    const question = questions[this.state.activeQuestionIndex];
     return (
-      <View style={styles.container}>
+      <View
+        style={[
+          styles.container,
+          { backgroundColor: this.props.navigation.getParam("color") }
+        ]}
+      >
         <StatusBar barStyle="light-content" />
         <SafeAreaView style={styles.safeArea}>
           <View>
