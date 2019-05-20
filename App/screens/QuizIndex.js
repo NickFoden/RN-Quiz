@@ -1,9 +1,12 @@
 import React from "react";
+import { View, Button, StatusBar } from "react-native";
 
-import { View, Button } from "react-native";
-
-export default ({ children }) => (
+export default ({ navigation }) => (
   <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-    <Button title="Go to next screen" onPress={() => alert("to do")} />
+    <StatusBar barStyle="dark-content" />
+    <Button
+      title="Go to next screen"
+      onPress={() => navigation.navigate("Quiz")}
+    />
   </View>
 );
